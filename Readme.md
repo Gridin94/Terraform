@@ -39,7 +39,7 @@ okta_key         = "Okta key for API calls"<br/>
 
 __To deploy the enviroment follow these steps in the terminal:__
 
-1 . To initialize Terraform, first create azure blobe called tfstate and update the location in backend.tf file
+1 . To initialize Terraform, first create azure blobe and update the location in backend.tf file
 
 2 . To initialize Terraform working directory run
 
