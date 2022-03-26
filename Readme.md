@@ -18,7 +18,7 @@ Project environment:
 
 ## Note
 __For this project I have created VM image with custom data and one managed database__
-
+__The number of VMs can be changed in variables.tf file under num var__
 Please read the requirements of the application.
 
 **_In addition the vm gets a script I wrote for setting up the vm, .env file,Okta application redirect URIs using Okta API and finally initialize the database and running the application as a service using pm2_** 
@@ -39,13 +39,13 @@ okta_key         = "Okta key for API calls"<br/>
 
 __To deploy the enviroment follow these steps in the terminal:__
 
-1 . To initialize Terraform working directory run
+1 . To initialize Terraform, first create azure blobe called tfstate and update the location in backend.tf file
+
+2 . To initialize Terraform working directory run
 
     terraform init
 
-2 . To deploy the enviroment:
-
->2.1. If you are using .tfvars file run:
+3 . To deploy the enviroment:
 
     terraform apply
 
