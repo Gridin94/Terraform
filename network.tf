@@ -27,7 +27,7 @@ resource "azurerm_network_security_group" "nsg1" {
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefix    = "192.168.1.34"
+    source_address_prefix      = "192.168.1.34"
     destination_address_prefix = "*"
   }
   security_rule {
@@ -88,17 +88,6 @@ resource "azurerm_network_security_group" "nsg2" {
     source_port_range          = "5432"
     destination_port_range     = "5432"
     source_address_prefix      = "VirtualNetwork"
-    destination_address_prefix = "*"
-  }
-  security_rule {
-    name                       = "blocknotdb"
-    priority                   = 120
-    direction                  = "Inbound"
-    access                     = "Deny"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
 }
