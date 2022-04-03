@@ -9,7 +9,6 @@ resource "azurerm_linux_virtual_machine" "main" {
   admin_username        = var.admin_username
   admin_password        = var.admin_password
   disable_password_authentication = false
-  custom_data = base64encode(templatefile("./modules/vms/vmstartscript.tpl",local.vars))
 
     source_image_reference {
     publisher = "Canonical"

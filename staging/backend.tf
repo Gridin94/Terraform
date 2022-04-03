@@ -18,7 +18,7 @@ terraform {
     resource_group_name  = "terraformbackend"
     storage_account_name = "terraform1daniel"
     container_name       = "tfstate"
-    key                  = "terraform.tfstate"
+    key                  = "staging/terraform.tfstate"
   }
 }
 
