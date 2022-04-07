@@ -3,21 +3,21 @@
 resource "azurerm_virtual_network" "main" {
   name                = "${var.prefix}-network"
   address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
+  location            = var.resource_group.location
+  resource_group_name = var.resource_group.name
 }
 
 resource "azurerm_subnet" "internal1" {
   name                 = "internal1"
-  resource_group_name  = azurerm_resource_group.main.name
+  resource_group_name  = var.resource_group.name
   virtual_network_name = azurerm_virtual_network.main.name
   address_prefixes     = ["10.0.1.0/24"]
 }
 
 resource "azurerm_network_security_group" "nsg1" {
   name                = "nsg1"
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
+  location            = var.resource_group.location
+  resource_group_name = var.resource_group.name
 
   security_rule {
     name                       = "SSH"
@@ -61,7 +61,7 @@ resource "azurerm_subnet_network_security_group_association" "net1" {
 
 resource "azurerm_subnet" "internal2" {
   name                 = "internal2"
-  resource_group_name  = azurerm_resource_group.main.name
+  resource_group_name  = var.resource_group.name
   virtual_network_name = azurerm_virtual_network.main.name
   address_prefixes     = ["10.0.2.0/24"]
   service_endpoints    = ["Microsoft.Storage"]
@@ -76,8 +76,8 @@ resource "azurerm_subnet" "internal2" {
 
 resource "azurerm_network_security_group" "nsg2" {
   name                = "nsg2"
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
+  location            = var.resource_group.location
+  resource_group_name = var.resource_group.name
 
   security_rule {
     name                       = "db"

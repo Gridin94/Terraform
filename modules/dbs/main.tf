@@ -2,22 +2,22 @@
 
 resource "azurerm_private_dns_zone" "private_dns_zone" {
   name                = "privatednszone.postgres.database.azure.com"
-  resource_group_name = azurerm_resource_group.main.name
+  resource_group_name = var.resource_group.name
 }
 
 resource "azurerm_private_dns_zone_virtual_network_link" "private_dns_zone_virtual_network_link" {
   name                  = "VnetZone.com"
   private_dns_zone_name = azurerm_private_dns_zone.private_dns_zone.name
-  virtual_network_id    = azurerm_virtual_network.main.id
-  resource_group_name   = azurerm_resource_group.main.name
+  virtual_network_id    = var.vnet.id
+  resource_group_name   = var.resource_group.name
 }
 
 resource "azurerm_postgresql_flexible_server" "db" {
-  name                   = "danielflexserver"
-  resource_group_name    = azurerm_resource_group.main.name
-  location               = azurerm_resource_group.main.location
+  name                   = var.dbname
+  resource_group_name    = var.resource_group.name
+  location               = var.resource_group.location
   version                = "13"
-  delegated_subnet_id    = azurerm_subnet.internal2.id
+  delegated_subnet_id    = var.subnet_id
   private_dns_zone_id    = azurerm_private_dns_zone.private_dns_zone.id
   administrator_login    = "${var.pg_user}"
   administrator_password = "${var.pg_pass}"
@@ -30,7 +30,7 @@ resource "azurerm_postgresql_flexible_server" "db" {
 }
 
 resource "azurerm_postgresql_flexible_server_database" "postgresql_flexible_server_database" {
-  name      = "${var.prefix}-db"
+  name      = "${var.dbname}-db"
   server_id = azurerm_postgresql_flexible_server.db.id
   collation = "en_US.utf8"
   charset   = "utf8"
