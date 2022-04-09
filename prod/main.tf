@@ -1,4 +1,4 @@
-#This file run vms module:
+#This file run all modules:
 
 module "vms" {
     source          = "..//modules/vms"
@@ -19,4 +19,10 @@ module "dbs" {
     subnet_id       = azurerm_subnet.internal2.id
     pg_user         = var.pg_user
     pg_pass         = var.pg_pass
+}
+
+module "networks" {
+    source          = "..//modules/networks"
+    vnetname        = var.prefix
+    resource_group  = azurerm_resource_group.main
 }

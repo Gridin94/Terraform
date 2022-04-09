@@ -1,6 +1,6 @@
 #This file contains all the variables:
 
-variable "name" {
+variable "vnetname" {
   default = ""
 }
 

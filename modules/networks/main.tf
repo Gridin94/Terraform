@@ -1,7 +1,7 @@
 #This file manage all of the network infrastructure:
 
 resource "azurerm_virtual_network" "main" {
-  name                = "${var.prefix}-network"
+  name                = "${var.vnetname}-network"
   address_space       = ["10.0.0.0/16"]
   location            = var.resource_group.location
   resource_group_name = var.resource_group.name
@@ -27,7 +27,7 @@ resource "azurerm_network_security_group" "nsg1" {
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefix      = "192.168.1.34"
+    source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
   security_rule {
@@ -38,17 +38,6 @@ resource "azurerm_network_security_group" "nsg1" {
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "8080"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-  security_rule {
-    name                       = "blocknotapp"
-    priority                   = 130
-    direction                  = "Inbound"
-    access                     = "Deny"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }

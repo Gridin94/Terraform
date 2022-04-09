@@ -23,6 +23,6 @@ terraform {
 }
 
 resource "azurerm_resource_group" "main" {
-  name     = "${var.prefix}-resources"
+  name     = "${var.prefix}-staging"
   location = "West Europe"
 }

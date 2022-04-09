@@ -1,4 +1,4 @@
-#This file run vms module:
+#This file run all modules:
 
 module "vms" {
     source          = "..//modules/vms"
@@ -7,7 +7,7 @@ module "vms" {
     resource_group  = azurerm_resource_group.main
     admin_username  = "${var.admin_username}"
     admin_password  = "${var.admin_password}"
-    subnet_id       = azurerm_subnet.internal1.id
+    subnet_id       = module.networks.azurerm_subnet1.id
     depends_on      = [azurerm_lb.lb]
 }
 
@@ -15,8 +15,8 @@ module "dbs" {
     source          = "..//modules/dbs"
     dbname          = "${var.dbname}stage"
     resource_group  = azurerm_resource_group.main
-    vnet            = azurerm_virtual_network.main
-    subnet_id       = azurerm_subnet.internal2.id
+    vnet            = module.networks.azurerm_virtual_network
+    subnet_id       = module.networks.azurerm_subnet2.id
     pg_user         = var.pg_user
     pg_pass         = var.pg_pass
 }
@@ -24,4 +24,5 @@ module "dbs" {
 module "networks" {
     source          = "..//modules/networks"
     vnetname        = var.prefix
+    resource_group  = azurerm_resource_group.main
 }

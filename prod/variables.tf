@@ -1,7 +1,7 @@
 #This file contains all the variables:
 
 variable "prefix" {
-    default = "weight-app"
+    default = "weight-tracker"
 }
 
 variable "admin_username" {
