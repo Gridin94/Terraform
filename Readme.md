@@ -52,3 +52,8 @@ __for example:__
 >To remove whole enviroment run:
 
     terraform destroy
+
+
+>Output from terraform run:
+
+    vm's password
